@@ -46,8 +46,8 @@
  $构造方法$
   * XMLHttpRequest()
  $属性$
-  * status: //200
-  * statusText: //'OK'
+  * status:      //200 
+  * statusText:  //'OK'
   * readyState 
   //0 UNSENT 实例化XMLHttpRequest, 
   //1 OPENED open方法被调用, 
@@ -62,11 +62,11 @@
   //'document', HTML Document 或者 XML XMLDocument
   //'json', JSON对象
 
-  * response
-  * responseText
-  * responseXML
-  * responseURL //不包含锚点（#）
-  * timeout //超时时间
+  * response        //返回的数据
+  * responseText    //返回的数据
+  * responseXML     //响应的xml数据
+  * responseURL     //不包含锚点（#）
+  * timeout         //超时时间
   * withCredentials //跨域
 
   * upload //返回一个上传对象 XMLHttpRequestUpload
@@ -82,42 +82,39 @@
  $方法$
   * 初始化一个请求
    open(
-     String:method, //POST GET ...
-     String:url, 
-     Boolean:async, 请求模式，可选
-     [String,Number]:user, 用户验证的用户账号，可选
-     [String,Number]:password 用户验证的用户密码，可选
+     String:method,           //POST GET ...
+     String:url,              //请求接口
+     Boolean:async,           //请求模式，可选； true异步，false同步
+     [String,Number]:user,    //用户验证的用户账号，可选
+     [String,Number]:password //用户验证的用户密码，可选
     ) 
 
   * 发送请求
    send([
-     '', //不发送任何数据
+     '',              //不发送任何数据
      ArrayBuffer,
      ArrayBufferView,
      Blob,
-     Document, //需要序列化 
+     Document,       //需要序列化改文档 
      DOMString,
      FormData
    ]) 
 
   * abort() 终止请求
-
-  * setRequestHeader(name,value) 设置头部，在open 和 send之间调用
-
+  * setRequestHeader(name,value) %tip% 设置头部，在open 和 send之间调用
   * getAllResponseHeader()
   * getResponseHeader(name)
-
   * overrideMimeType()
 
  $事件$
-  * abort 请求被终止时
-  * error 当请求错误时
-  * load 请求成功完成时
-  * timeout 预设时间内没有接收到响应时触发
-  * loadstart
-  * progress
-  * loadend
-  必须在open前添加事件, onreadystatechange准确来说是一个属性，而不是一个事件
+  * abort     //请求被终止时
+  * error     //当请求错误时
+  * load      //请求成功完成时
+  * timeout   //预设时间内没有接收到响应时触发
+  * loadstart //请求开始前
+  * progress  //数据传输中
+  * loadend   //请求完成
+  %tip% 必须在open前添加事件, onreadystatechange准确来说是一个属性，而不是一个事件
 
  $事件执行顺序
   * onreadystatechange //如果同时设置了改属性
@@ -129,10 +126,33 @@
   * load
   * loadend
   
+#客户端#
+* step 1 
+实例化一个XMLHttpRequest对象
+var xhr = new XMLHttpRequest()
 
+* step 2 
+添加事件监听
+xhr.addEventListener('event-type', handler) 或者 xhr.on +'event-type' = function(){}
 
+* step 3 
+设置响应数据的类型 ，默认是''
+xhr.responsType = 'json' 
 
+* step 4 
+设置开启认证
+xhr.withCredentials = true
 
-#客户端
+* step 5 
+打开一个请求
+xhr.open(method,url,async,user,password);
+
+* step 6 
+设置请求头，如果有需要的话
+xhr.setRequestHeader(name,value)
+
+* step 7 
+发送请求
+xhr.send(data)
 
 #服务器端
