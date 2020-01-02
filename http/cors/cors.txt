@@ -1,8 +1,8 @@
-#主题
+#主题#
 *zh: 跨域 
 *en: (CORS) (cross-origin resource sharing)
 
-#概念
+#概念#
 *zh: 不同服务器间访问、共享数据 
 *en: open access across domain-boundaries 
 
@@ -17,7 +17,7 @@
 
 ----------------^_^微笑分割线^_^----------------
 
-#浏览器支持
+#浏览器支持#
 * 通过CAN I USE 网站查看浏览器支持
 * [site: https://www.caniuse.com/#home；keyword: Cross-Origin Resource Sharing]
 
@@ -29,23 +29,23 @@
 
 ----------------^_^微笑分割线^_^----------------
 
-#起源
-*zh: 浏览器的同源策略，导致了不同域名的应用间不能通过接口请求访问、共享数据
+#起源#
+*zh: 浏览器的同源策略，导致了不同域名间的应用不能通过接口请求访问、共享数据
 *en: the browser same-origin policy prevents javascript from making requests across domain boundaries.
 
 ----------------^_^微笑分割线^_^----------------
-#API
- $API实现
+#API#
+ $API实现$
   * XMLHttpRequest(ie10+) 
   * ActiveXObject(ie6-) 
   * XDomainRequest(ie8-9); 
- $API树
+ $API树$
   * EventTarget<--XMLHttpRequestEventTarget<--XMLHttpRequest
- $API支持协议
+ $API支持协议$
   * HTTP, FILE://, FTP
- $构造方法
+ $构造方法$
   * XMLHttpRequest()
- $属性
+ $属性$
   * status: //200
   * statusText: //'OK'
   * readyState 
@@ -79,7 +79,7 @@
   //onloadend XMLHttpRequestUpload事件
  
 
- $方法
+ $方法$
   * 初始化一个请求
    open(
      String:method, //POST GET ...
@@ -109,7 +109,7 @@
 
   * overrideMimeType()
 
- $事件
+ $事件$
   * abort 请求被终止时
   * error 当请求错误时
   * load 请求成功完成时
