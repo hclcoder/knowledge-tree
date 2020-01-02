@@ -178,6 +178,7 @@
        如果服务器没有响应Access-Control-Allow-Credentials，那么浏览器会忽略掉这次响应
        如果服务器设置Access-Control-Allow-Credentials为true，那么就不能再设置Access-Control-Allow-Origin为*,必须用具体的域名。
 
+----------------^_^微笑分割线^_^----------------
 
 #客户端#
 * step 1 
