@@ -210,6 +210,15 @@ xhr.send(data)
 
 ----------------^_^微笑分割线^_^----------------
 
+#服务器端#
+* Access-Control-Allow-Origin = '*'
+* Access-Control-Allow-Credentials = true
+* Access-Control-Allow-Methods = 'GET,POST OPTION,PUT'
+* Access-Control-Allow-Headers = 'Content-Type'   //请求头中的name
+%tip% 当withCredentials=true时Access-Control-Allow-Origin不能设置成'*'，必须时具体的origin
+
+----------------^_^微笑分割线^_^----------------
+
 #jQuery 跨域#
 $.ajax(option) 支持跨域和非跨域请求
 
@@ -224,12 +233,6 @@ option = {
   success: function(data){},
   error: function(){}
 }
-
-#服务器端#
-* Access-Control-Allow-Origin = '*'
-* Access-Control-Allow-Credentials = true
-* Access-Control-Allow-Methods = 'GET,POST OPTION,PUT'
-* Access-Control-Allow-Headers = 'Content-Type'   //请求头中的name
 
 ----------------^_^微笑分割线^_^----------------
 
