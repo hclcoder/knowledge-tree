@@ -17,7 +17,7 @@
 
 ----------------^_^微笑分割线^_^----------------
 
-#浏览器支持#
+#资源网站#
 * 通过CAN I USE 网站查看浏览器支持
 * [site: https://www.caniuse.com/#home；keyword: Cross-Origin Resource Sharing]
 
