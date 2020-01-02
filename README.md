@@ -1,2 +1,3 @@
-# knowledge-tree
-This repository collect some problems encountered at working and the system  knowledge behind the problems
+该库是对工作中遇到的问题的总结，并梳理出问题背后的知识
+# http/cors 
+跨域相关的问题
