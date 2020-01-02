@@ -25,9 +25,11 @@
 * [site:https://www.w3.org/TR/cors/; 跨域的标准文件]
 
 * 其他网站
-*[site: https://enable-cors.org/]
+*[site: https://enable-cors.org, https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS]
 
-* 支持情况
+
+----------------^_^微笑分割线^_^----------------
+#支持情况#
 * [Chrome 3+, Firefox 3.5+, Opera 12+, Safari 4+, Internet Explorer 8+]
 
 ----------------^_^微笑分割线^_^----------------
