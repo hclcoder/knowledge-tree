@@ -134,9 +134,49 @@
 #跨域请求的分类#
 *zh: 简单跨域请求
 *en: simple request
+ $简单跨域请求$
+  * 请求的方法是GET,HEAD,POST，且Content-Type是application/x-www-form-urlencoded, multipart/form-data 或 text/plain中的一个值
+  * 请求中没有自定义的HTTP头部
+ $流程$
+  * step 1 
+  浏览器：把客户端脚本所在的域填充到Origin里，向其他域的服务器请求资源
+  * step 2
+  服务器：根据资源权限配置，在响应头中添加Access-Control-Allow-Origin，返回结果
+  * step 3
+  浏览器：比较服务器返回的Access-Control-Allow-Origin 和请求域的Origin,如果当前域已经得到授权，则将结果返回给页面。否则浏览器忽略此次响应
+ $总结$
+  * 对于简单的跨域请求，只要服务器设置的Access-Control-Allow-Origin = '*'
 
-*zh: 非简单跨域请求。会修改请求头部，或者在头部设置自定义数据
+*zh: 带预检(Preflighted)的跨域请求
 *en: not simple request
+ $带预检(Preflighted)的跨域请求$
+  * 请求的方法不是 GET, HEAD或者POST三种或者是这三种，但是Content-Type不是application/x-www-form-urlencoded, multipart/form-data或text/plain中的一种
+  * 请求中有自定义HTTP头部
+ $流程$
+  * step 1 
+  浏览器：向服务器发送一个OPTIONS预检请求
+  * step 2
+  服务器：响应OPTIONS请求，会在responseHead里添加Access-Control-Allow-Methods，Access-Control-Allow-Origin，Access-Control-Allow-Headers，Access-Control-Max-Age
+  * step 3
+  浏览器：接到OPTIONS的响应，比较真实请求的method是否属于返回的Access-Control-Allow-Methods的值之一，还有origin也会进行比较是否匹配
+        预检测失败就会报错
+          1.1请求来源不被options响应允许 
+            Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin'
+          1.2请求方法不被options响应允许
+            Method PUT is not allowed by Access-Control-Allow-Methods in preflight response
+          1.3请求中有自定义header不被options响应允许
+            Request header field myHeader is not allowed by Access-Control-Allow-Headers in preflight response
+  * step 4
+  服务器：响应真实请求
+  * step 5
+  浏览器：接受服务器对真实请求的返回结果，返回给网页
+  $总结$
+   *Access-Control-Allow-Methods和Access-Control-Allow-Headers只在响应options请求时有作用
+
+ %tip% XMLHttpRequest支持通过withCredentials属性跨域请求携带身份信息(Credential，例如Cookie或者HTTP认证信息)。
+       浏览器将携带Cookie Header的请求发送到服务器端后
+       如果服务器没有响应Access-Control-Allow-Credentials，那么浏览器会忽略掉这次响应
+       如果服务器设置Access-Control-Allow-Credentials为true，那么就不能再设置Access-Control-Allow-Origin为*,必须用具体的域名。
 
 
 #客户端#
@@ -153,7 +193,7 @@ xhr.addEventListener('event-type', handler) 或者 xhr.on +'event-type' = functi
 xhr.responsType = 'json' 
 
 * step 4 
-设置开启认证
+设置开启认证 (可选，默认不用开启)
 xhr.withCredentials = true
 
 * step 5 
@@ -186,6 +226,10 @@ option = {
 }
 
 #服务器端#
+* Access-Control-Allow-Origin = '*'
+* Access-Control-Allow-Credentials = true
+* Access-Control-Allow-Methods = 'GET,POST OPTION,PUT'
+* Access-Control-Allow-Headers = 'Content-Type'   //请求头中的name
 
 ----------------^_^微笑分割线^_^----------------
 
