@@ -1,0 +1,138 @@
+#主题
+*zh: 跨域 
+*en: (CORS) (cross-origin resource sharing)
+
+#概念
+*zh: 不同服务器间访问、共享数据 
+*en: open access across domain-boundaries 
+
+*zh: 是W3C的一个标准 
+*en: a W3C specification 
+
+*zh: 一套机制 
+*en: a standard mechanism that can be used by all browsers for implementing cross-domain requests
+
+*zh: 建立在XMLHttpRequest对象上 
+*en: build on top of XMLHttpRequest object
+
+----------------^_^微笑分割线^_^----------------
+
+#浏览器支持
+* 通过CAN I USE 网站查看浏览器支持
+* [site: https://www.caniuse.com/#home；keyword: Cross-Origin Resource Sharing]
+
+* 其他网站
+*[site: https://enable-cors.org/]
+
+* 支持情况
+* [Chrome 3+, Firefox 3.5+, Opera 12+, Safari 4+, Internet Explorer 8+]
+
+----------------^_^微笑分割线^_^----------------
+
+#起源
+*zh: 浏览器的同源策略，导致了不同域名的应用间不能通过接口请求访问、共享数据
+*en: the browser same-origin policy prevents javascript from making requests across domain boundaries.
+
+----------------^_^微笑分割线^_^----------------
+#API
+ $API实现
+  * XMLHttpRequest(ie10+) 
+  * ActiveXObject(ie6-) 
+  * XDomainRequest(ie8-9); 
+ $API树
+  * EventTarget<--XMLHttpRequestEventTarget<--XMLHttpRequest
+ $API支持协议
+  * HTTP, FILE://, FTP
+ $构造方法
+  * XMLHttpRequest()
+ $属性
+  * status: //200
+  * statusText: //'OK'
+  * readyState 
+  //0 UNSENT 实例化XMLHttpRequest, 
+  //1 OPENED open方法被调用, 
+  //2 HEADERS_RECEIVED send方法被调用，头部和状态可以获取, 
+  //3 LOADING 下载中， responseText有数据, 
+  //4 DONE 下载操作已完成
+ 
+  * responsType
+  //'' 等价于 'text', 是默认字符串
+  //'arraybuffer', 包含二进制数据 ArrayBuffer对象
+  //'blob', 包含二进制数据 Blob对象
+  //'document', HTML Document 或者 XML XMLDocument
+  //'json', JSON对象
+
+  * response
+  * responseText
+  * responseXML
+  * responseURL //不包含锚点（#）
+  * timeout //超时时间
+  * withCredentials //跨域
+
+  * upload //返回一个上传对象 XMLHttpRequestUpload
+  //onloadstart	获取开始 XMLHttpRequestUpload事件
+  //onprogress	数据传输进行中 XMLHttpRequestUpload事件
+  //onabort	获取操作终止 XMLHttpRequestUpload事件
+  //onerror	获取失败 XMLHttpRequestUpload事件
+  //onload	获取成功 XMLHttpRequestUpload事件
+  //ontimeout	获取操作在用户规定的时间内未完成 XMLHttpRequestUpload事件
+  //onloadend XMLHttpRequestUpload事件
+ 
+
+ $方法
+  * 初始化一个请求
+   open(
+     String:method, //POST GET ...
+     String:url, 
+     Boolean:async, 请求模式，可选
+     [String,Number]:user, 用户验证的用户账号，可选
+     [String,Number]:password 用户验证的用户密码，可选
+    ) 
+
+  * 发送请求
+   send([
+     '', //不发送任何数据
+     ArrayBuffer,
+     ArrayBufferView,
+     Blob,
+     Document, //需要序列化 
+     DOMString,
+     FormData
+   ]) 
+
+  * abort() 终止请求
+
+  * setRequestHeader(name,value) 设置头部，在open 和 send之间调用
+
+  * getAllResponseHeader()
+  * getResponseHeader(name)
+
+  * overrideMimeType()
+
+ $事件
+  * abort 请求被终止时
+  * error 当请求错误时
+  * load 请求成功完成时
+  * timeout 预设时间内没有接收到响应时触发
+  * loadstart
+  * progress
+  * loadend
+  必须在open前添加事件, onreadystatechange准确来说是一个属性，而不是一个事件
+
+ $事件执行顺序
+  * onreadystatechange //如果同时设置了改属性
+  * loadstart
+  * onreadystatechange //如果同时设置了改属性
+  * onreadystatechange //如果同时设置了改属性
+  * progress
+  * onreadystatechange //如果同时设置了改属性
+  * load
+  * loadend
+  
+
+
+
+
+#客户端
+
+#服务器端
