@@ -21,6 +21,9 @@
 * 通过CAN I USE 网站查看浏览器支持
 * [site: https://www.caniuse.com/#home；keyword: Cross-Origin Resource Sharing]
 
+* W3C 
+* [SITE:https://www.w3.org/TR/cors/; 跨域的标准文件]
+
 * 其他网站
 *[site: https://enable-cors.org/]
 
@@ -126,6 +129,16 @@
   * load
   * loadend
   
+----------------^_^微笑分割线^_^----------------
+
+#跨域请求的分类#
+*zh: 简单跨域请求
+*en: simple request
+
+*zh: 非简单跨域请求。会修改请求头部，或者在头部设置自定义数据
+*en: not simple request
+
+
 #客户端#
 * step 1 
 实例化一个XMLHttpRequest对象
@@ -155,4 +168,26 @@ xhr.setRequestHeader(name,value)
 发送请求
 xhr.send(data)
 
-#服务器端
+----------------^_^微笑分割线^_^----------------
+
+#jQuery 跨域#
+$.ajax(option) 支持跨域和非跨域请求
+
+option = {
+  async: true,                        //是否异步
+  type: 'GET',                        //请求方法
+  url: 'https://www.baidu.com'        //请求接口
+  timeout: 6000,                      //请求超时时间
+  contentType: 'text/plain',          //数据到服务器时所使用的内容类型
+  dataType: 'json',                   //返回的数据类型
+  data: {}                            //发送的数据
+  success: function(data){},
+  error: function(){}
+}
+
+#服务器端#
+
+----------------^_^微笑分割线^_^----------------
+
+#常见问题#
+* 会先发送一个OPTION类型的预请求，接着才会发送正式的请求
