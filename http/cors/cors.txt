@@ -2,6 +2,8 @@
 *zh: 跨域 
 *en: (CORS) (cross-origin resource sharing)
 
+----------------^_^微笑分割线^_^----------------
+
 #概念#
 *zh: 不同服务器间访问、共享数据 
 *en: open access across domain-boundaries 
