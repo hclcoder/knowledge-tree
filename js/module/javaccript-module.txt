@@ -1,0 +1,106 @@
+#模块化的概念
+* 最初被定义为一种在传统软件工程中为类提供私有和公有封装的方法
+
+#关键问题
+* 模块之间的循环依赖问题
+
+#发展历程
+* 匿名函数自调用(闭包)
+  例子
+  var moduleName = (function(param2){
+    return module
+  })(param1)
+  分析：
+    ()()-->自调用结构
+    function(){}-->被调用的函数
+    param1-->自调用函数外层的变量
+    param2-->自调用函数外层的变量的引用
+  总结：
+    缓解了全局作用域命名冲突和安全性的问题
+    不能够用它来组织和拆分代码
+
+* CommonJS 以单个文件作为模块，每个文件有单独的作用域，通过require来引入模块，通过module.exports暴露public成员
+  例子：
+    var a = 'hcl';
+    module.exports.name = a; 
+
+    require('./m.js)
+  分析：
+    module.exports-->对外暴露的对象(接口)
+    require-->引入模块(依赖)
+  总结：
+    主要用在Node.js
+    require的加载是同步的
+    是一种规范
+
+* AMD 
+  例子
+    define([dm1,dm2],function(dm1,dm2){
+      return module
+    })
+
+    require([dm1,dm2],function(dm1,dm2){
+　　　　// some code here
+　　});
+  分析：
+    define-->定义模块
+    require-->引入模块(依赖)
+  总结
+    AMD规范的被依赖模块是异步加载的
+    定义的模块是被当作回调函数来执行的
+    异步加载模块
+    依赖于RequireJs等模块管理工具库
+    AMD依赖前置，js可以方便知道依赖模块是谁，立即加载
+    是一种规范
+
+* CMD 
+  例子
+    define(function(require, exports, module) {
+      var dm = require(dm);
+      exports.a = dm.doSomeThing();
+    });
+
+    seajs.use(['module'], function(dm){
+      //do somethind
+    }}
+  分析：
+    define-->定义模块
+    seajs.use-->引入模块(依赖)
+  总结
+    AMD和CMD最大的区别是对依赖模块的执行时机处理不同，而不是加载的时机或者方式不同
+    定义的模块是被当作回调函数来执行的
+    异步加载模块
+    依赖于seajs等模块管理工具库
+    是一种规范
+
+* UMD 对CommonJs、AMD的兼容模式
+  例子
+    (function(root,factory){
+      if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+      } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        var dm = require('dm')
+        module.exports = factory(dm); 
+      } else {
+        // Browser globals (root is window)
+        root.returnExports = factory(root.jQuery);
+      }
+    }(root,factory))
+  分析：
+    (function(){}())-->自调用模式，function将会被执行
+    root-->js的宿主，浏览器是window
+    factory-->构建模块的执行函数，返回构建的模块
+    
+
+* ES6 module ES6的模块化已经不是规范了，而是JS语言的特性
+  例子
+  export function add() {}
+  import {add} from module
+
+  总结：
+    模块化规范输出的是一个值的拷贝，ES6 模块输出的是值的引用
+    模块化规范是运行时加载，ES6 模块是编译时输出接口
+
+
