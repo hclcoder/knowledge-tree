@@ -23,7 +23,6 @@
   例子：
     var a = 'hcl';
     module.exports.name = a; 
-
     require('./m.js)
   分析：
     module.exports-->对外暴露的对象(接口)
@@ -38,7 +37,6 @@
     define([dm1,dm2],function(dm1,dm2){
       return module
     })
-
     require([dm1,dm2],function(dm1,dm2){
 　　　　// some code here
 　　});
@@ -59,7 +57,6 @@
       var dm = require(dm);
       exports.a = dm.doSomeThing();
     });
-
     seajs.use(['module'], function(dm){
       //do somethind
     }}

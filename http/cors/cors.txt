@@ -31,6 +31,7 @@
 
 
 ----------------^_^微笑分割线^_^----------------
+
 #支持情况#
 * [Chrome 3+, Firefox 3.5+, Opera 12+, Safari 4+, Internet Explorer 8+]
 
