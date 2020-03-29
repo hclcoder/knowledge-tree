@@ -1,0 +1,66 @@
+#git特性
+*只能跟踪纯文本的文件
+
+#初始化仓库
+*1 cd into dir
+*2 git init
+
+#把文件放进仓库-只是放在了暂存区
+*1 git add filename  指定文件
+*2 git add ./  当前目录下面的所有文件
+
+#把文件提交到仓库-真正提交到仓库
+*1 git commit  -m  '备注文字'
+
+#查看当前工作区和暂存区的状态
+*1 git status 
+
+#回退版本
+*1 git log 查看提交记录
+*2 git reset --hard HEAD^ 回退到上一个版本
+*3 git reset --hard HEAD~[number]  回退到指定版本,仅需要输入qian7-10位
+
+#回退单个文件的版本
+*1 git reset HEAD [file name]  放弃提交到暂存区的修改
+*1 git checkout -- [file name]  放弃工作区的修改
+
+#恢复到指定版本-v1
+*1 git reset --hard [sha value] 恢复到指定版本
+#恢复到指定版本-v2
+*1 git reflog 查看每次提交命令的id
+*2 git reset --hard [sha value] 恢复到指定版本
+
+#删除文件
+*1 git rm  [file name] 
+*2 git commit -m 'comment'
+
+/////////////////////////////////////////////本地库操作结束
+---------------------------------------------远程操作开始
+#关联远程库
+* git remote add origin [repository address]  远程库地址
+#解绑远程库
+*git remote rm origin
+#推送文件
+* git push -u origin [branch name]  远程库的版本分支
+#拉取文件
+* git pull origin [branch name]
+#克隆远程库
+* git clone [repository address]   远程库的地址
+
+/////////////////////////////////////////////远程操作结束
+---------------------------------------------分支管理开始
+#创建分支
+* git branch [branch name]  
+#切换分支
+* git checkout [branch name] 
+#查看当前分支
+* git branch  
+#删除分支
+* git branch -d [branch name]
+#合并分支
+* git merge [branch name]  合并分支
+
+
+
+
+ 
